@@ -13,10 +13,10 @@ public class JinxedExamples {
 
     //-------------------------BLOCK EXAMPLES-------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public static final Supplier<Block> NO_BLOCK_ITEM = registerBlockWithCustomID("no_block_item", false,
+    public static final Supplier<Block> NO_BLOCK_ITEM = registerBlock("no_block_item", false,
             () -> new Block(BlockBehaviour.Properties.of().strength(1.75F, 5F)));
 
-    public static final Supplier<Block> HAS_BLOCK_ITEM = registerBlockWithCustomID("has_block_item", true,
+    public static final Supplier<Block> HAS_BLOCK_ITEM = registerBlock("has_block_item", true,
             () -> new Block(BlockBehaviour.Properties.of().strength(1.75F, 5F)));
 
     public static final Supplier<Block> HAS_BLOCK_ITEM_TWO = registerBlockWithCustomID("has_block_item_two", true,

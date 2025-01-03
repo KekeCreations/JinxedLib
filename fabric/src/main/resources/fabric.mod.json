@@ -17,6 +17,9 @@
     "entrypoints": {
         "main": [
             "com.kekecreations.jinxedlib.JinxedLibFabric"
+        ],
+        "client": [
+            "com.kekecreations.jinxedlib.JinxedLibClientFabric"
         ]
     },
     "mixins": [

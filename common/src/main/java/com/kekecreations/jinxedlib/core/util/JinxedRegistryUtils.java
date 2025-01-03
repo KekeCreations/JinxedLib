@@ -1,6 +1,10 @@
 package com.kekecreations.jinxedlib.core.util;
 
+import com.kekecreations.jinxedlib.core.mixin.SpriteSourcesMixin;
 import com.kekecreations.jinxedlib.core.platform.Services;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.client.renderer.texture.atlas.SpriteSource;
+import net.minecraft.client.renderer.texture.atlas.SpriteSourceType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
@@ -28,6 +32,11 @@ public class JinxedRegistryUtils {
             registerItem(modID, name, () -> new BlockItem(block.get(), new Item.Properties()));
         }
         return block;
+    }
+
+    //REGISTER SPRITE SOURCES UNDER THE MINECRAFT NAMESPACE
+    public static SpriteSourceType registerSpriteSources(String id, MapCodec<? extends SpriteSource> codec) {
+        return SpriteSourcesMixin.invokeRegister(id, codec);
     }
 
 
