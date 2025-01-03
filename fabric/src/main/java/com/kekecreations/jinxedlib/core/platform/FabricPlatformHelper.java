@@ -1,6 +1,6 @@
-package com.kekecreations.jinxedlib.platform;
+package com.kekecreations.jinxedlib.core.platform;
 
-import com.kekecreations.jinxedlib.platform.services.IPlatformHelper;
+import com.kekecreations.jinxedlib.core.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class FabricPlatformHelper implements IPlatformHelper {

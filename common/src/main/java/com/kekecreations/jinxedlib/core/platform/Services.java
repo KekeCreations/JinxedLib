@@ -1,7 +1,8 @@
-package com.kekecreations.jinxedlib.platform;
+package com.kekecreations.jinxedlib.core.platform;
 
 import com.kekecreations.jinxedlib.JinxedLib;
-import com.kekecreations.jinxedlib.platform.services.IPlatformHelper;
+import com.kekecreations.jinxedlib.core.platform.services.IPlatformHelper;
+import com.kekecreations.jinxedlib.core.platform.services.IRegistryHelper;
 
 import java.util.ServiceLoader;
 
@@ -9,6 +10,7 @@ public class Services {
 
 
     public static final IPlatformHelper PLATFORM = load(IPlatformHelper.class);
+    public static final IRegistryHelper REGISTRY = load(IRegistryHelper.class);
 
 
     public static <T> T load(Class<T> clazz) {
