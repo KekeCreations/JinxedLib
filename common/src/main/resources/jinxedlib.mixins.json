@@ -4,7 +4,9 @@
   "package": "com.kekecreations.jinxedlib.core.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_18",
-  "mixins": [],
+  "mixins": [
+    "WoodTypeMixin"
+  ],
   "client": [
     "SpriteSourcesMixin"
   ],

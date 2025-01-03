@@ -1,6 +1,7 @@
 package com.kekecreations.jinxedlib.core.util;
 
 import com.kekecreations.jinxedlib.core.mixin.SpriteSourcesMixin;
+import com.kekecreations.jinxedlib.core.mixin.WoodTypeMixin;
 import com.kekecreations.jinxedlib.core.platform.Services;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.renderer.texture.atlas.SpriteSource;
@@ -10,6 +11,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.WoodType;
 
 import java.util.function.Supplier;
 
@@ -34,8 +36,13 @@ public class JinxedRegistryUtils {
         return block;
     }
 
+    //REGISTER WOOD TYPES
+    public static WoodType registerWoodType(WoodType woodType) {
+        return WoodTypeMixin.invokeRegister(woodType);
+    }
+
     //REGISTER SPRITE SOURCES UNDER THE MINECRAFT NAMESPACE
-    public static SpriteSourceType registerSpriteSources(String id, MapCodec<? extends SpriteSource> codec) {
+    public static SpriteSourceType registerSpriteSource(String id, MapCodec<? extends SpriteSource> codec) {
         return SpriteSourcesMixin.invokeRegister(id, codec);
     }
 
