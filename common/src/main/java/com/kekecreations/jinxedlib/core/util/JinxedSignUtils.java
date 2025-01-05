@@ -12,4 +12,19 @@ public class JinxedSignUtils {
      */
     public static List<Block> SIGN_IS_VALID = new ArrayList<>();
     public static List<Block> HANGING_SIGN_IS_VALID = new ArrayList<>();
+
+
+    /**
+     * This method adds the sign to the isValid method (Fixes sign blocks being invisible)
+     */
+    public static void isSignValid(Block block) {
+        SIGN_IS_VALID.add(block);
+    }
+
+    /**
+     * This method adds the hanging sign to the isValid method (Fixes sign blocks being invisible)
+     */
+    public static void isHangingSignValid(Block block) {
+        HANGING_SIGN_IS_VALID.add(block);
+    }
 }

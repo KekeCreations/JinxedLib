@@ -20,6 +20,10 @@ public class JinxedLib {
     }
 
 
+    /**
+     * This method is used where we need to use a different mod identifier
+     * It is recommended you only use one identifier per mod. (This mod does this because it is a library)
+     */
     public static ResourceLocation customId(String modID, String name) {
         return ResourceLocation.fromNamespaceAndPath(modID, name);
     }
