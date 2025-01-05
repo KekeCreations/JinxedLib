@@ -1,4 +1,4 @@
-package com.kekecreations.jinxedlib.core.registry;
+package com.kekecreations.jinxedlib.core.util;
 
 import net.minecraft.world.item.DyeColor;
 
