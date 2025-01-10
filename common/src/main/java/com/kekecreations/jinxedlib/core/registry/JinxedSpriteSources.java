@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.texture.atlas.SpriteSourceType;
 
 public class JinxedSpriteSources {
 
-    public static SpriteSourceType PALETTED_PERMUTATIONS = JinxedRegistryUtils.registerSpriteSources("jinxedlib_paletted_permutations", JinxedPalettedPermutations.CODEC);
+    public static SpriteSourceType PALETTED_PERMUTATIONS = JinxedRegistryUtils.registerSpriteSource("jinxedlib_paletted_permutations", JinxedPalettedPermutations.CODEC);
 
 
     public static void register() {}

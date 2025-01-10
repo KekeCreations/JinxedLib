@@ -1,5 +1,6 @@
 package com.kekecreations.jinxedlib;
 
+import com.kekecreations.jinxedlib.core.registry.JinxedRegistries;
 import com.kekecreations.jinxedlib.core.util.JinxedCreativeCategoryUtils;
 import com.kekecreations.jinxedlib.examples.JinxedExamples;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +16,7 @@ public class JinxedLib {
     public static void init() {
         JinxedExamples.loadExampleClass();
 
+        JinxedRegistries.register();
         JinxedCreativeCategoryUtils.addVanillaDyesToColourOrder();
         JinxedCreativeCategoryUtils.addVanillaDyesToColourOrderBackToFront();
     }
