@@ -1,10 +1,9 @@
 package com.kekecreations.jinxedlib;
 
-import com.kekecreations.jinxedlib.core.data.CompostingManagerFabric;
+import com.kekecreations.jinxedlib.common.data.Compostables;
+import com.kekecreations.jinxedlib.core.registry.JinxedDatapackRegistries;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 
 public class JinxedLibFabric implements ModInitializer {
     
@@ -12,7 +11,6 @@ public class JinxedLibFabric implements ModInitializer {
     public void onInitialize() {
         JinxedLib.init();
 
-        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(ResourceLocation.parse("composting"), CompostingManagerFabric::new);
-
+        DynamicRegistries.register(JinxedDatapackRegistries.COMPOSTABLES, Compostables.CODEC);
     }
 }

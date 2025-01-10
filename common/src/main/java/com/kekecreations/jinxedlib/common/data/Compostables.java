@@ -9,15 +9,15 @@ import net.minecraft.world.item.Item;
 
 import java.util.Map;
 
-public record Composting(Map<Holder<Item>, Float> values) {
+public record Compostables(Map<Holder<Item>, Float> values) {
 
-    public static final Codec<Composting> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<Compostables> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.unboundedMap(RegistryFixedCodec.create(Registries.ITEM), Codec.floatRange(0, 1))
                     .fieldOf("values")
-                    .forGetter(Composting::values)
-    ).apply(instance, Composting::new));
+                    .forGetter(Compostables::values)
+    ).apply(instance, Compostables::new));
 
-    public Composting(Map<Holder<Item>, Float> values) {
+    public Compostables(Map<Holder<Item>, Float> values) {
         this.values = values;
     }
 }
