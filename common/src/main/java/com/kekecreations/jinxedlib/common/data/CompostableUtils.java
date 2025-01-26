@@ -25,4 +25,11 @@ public class CompostableUtils {
         ).findFirst();
         return optionalPalette.isPresent();
     }
+
+    public static boolean canVillagerCompost(RegistryAccess access, ItemStack stack) {
+        Optional<Compostables> optionalPalette = access.registryOrThrow(JinxedDatapackRegistries.COMPOSTABLES).stream().filter(
+                Compostables::canVillagerCompost
+        ).findFirst();
+        return optionalPalette.stream().anyMatch(searchPalette -> searchPalette.values().containsKey(stack.getItemHolder()));
+    }
 }

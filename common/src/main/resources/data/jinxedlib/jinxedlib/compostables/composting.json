@@ -3,5 +3,6 @@
     "minecraft:diamond": 0.65,
     "minecraft:gold_ingot": 0.86,
     "minecraft:iron_ingot": 0.23
-  }
+  },
+  "can_villager_compost": false
 }

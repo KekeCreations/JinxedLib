@@ -7,7 +7,9 @@
   "mixins": [
     "BlockEntityTypeMixin",
     "ComposterBlockMixin",
-    "WoodTypeMixin"
+    "VillagerMixin",
+    "WoodTypeMixin",
+    "WorkAtComposterMixin"
   ],
   "client": [
     "SpriteSourcesMixin"

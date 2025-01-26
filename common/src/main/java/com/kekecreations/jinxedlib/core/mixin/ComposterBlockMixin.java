@@ -2,6 +2,7 @@ package com.kekecreations.jinxedlib.core.mixin;
 
 import com.kekecreations.jinxedlib.common.data.CompostableUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -62,6 +63,19 @@ public class ComposterBlockMixin {
                 }
                 cir.setReturnValue(blockState);
             }
+        }
+    }
+
+    //For Villagers
+    @Inject(method = "insertItem", at = @At(value = "HEAD"), cancellable = true)
+    private static void jinxedlib_insertItem(Entity pEntity, BlockState pState, ServerLevel pLevel, ItemStack pStack, BlockPos pPos, CallbackInfoReturnable<BlockState> cir) {
+        int i = pState.getValue(ComposterBlock.LEVEL);
+        if (i < 7 && CompostableUtils.getCompostableValue(pLevel.registryAccess(), pStack) > 0.0F) {
+            BlockState blockstate = addItem(pEntity, pState, pLevel, pPos, pStack);
+            pStack.shrink(1);
+            cir.setReturnValue(blockstate);
+        } else {
+            cir.setReturnValue(pState);
         }
     }
 }

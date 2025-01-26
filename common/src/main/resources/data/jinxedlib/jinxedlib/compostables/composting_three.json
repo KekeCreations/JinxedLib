@@ -3,5 +3,6 @@
     "minecraft:copper_ingot": 0.65,
     "minecraft:golden_sword": 0.86,
     "minecraft:diamond_sword": 1.0
-  }
+  },
+  "can_villager_compost": true
 }
