@@ -1,6 +1,8 @@
 package com.kekecreations.jinxedlib.core.mixin;
 
+import com.kekecreations.jinxedlib.JinxedLib;
 import com.kekecreations.jinxedlib.common.data.CompostableUtils;
+import com.kekecreations.jinxedlib.common.data.Compostables;
 import it.unimi.dsi.fastutil.objects.Reference2IntMap;
 import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -40,7 +42,7 @@ public class WorkAtComposterMixin {
         SimpleContainer simplecontainer = pVillager.getInventory();
         int k = simplecontainer.getContainerSize();
         BlockState blockstate = pState;
-        Reference2IntMap<Item> amounts = new Reference2IntOpenHashMap(COMPOSTABLE_ITEMS.size() * 2);
+        Reference2IntMap<Item> amounts = new Reference2IntOpenHashMap(COMPOSTABLE_ITEMS.size() * 256);
 
         for (int l = k - 1; l >= 0 && i > 0; --l) {
             ItemStack itemstack = simplecontainer.getItem(l);

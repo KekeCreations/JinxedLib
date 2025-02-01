@@ -2,7 +2,10 @@
   "values": {
     "minecraft:copper_ingot": 0.65,
     "minecraft:golden_sword": 0.86,
-    "minecraft:diamond_sword": 1.0
+    "minecraft:diamond_sword": 1.0,
+    "minecraft:iron_sword": 0.86,
+    "minecraft:iron_ingot": 0.86,
+    "minecraft:coal": 0.86
   },
   "can_villager_compost": true
 }

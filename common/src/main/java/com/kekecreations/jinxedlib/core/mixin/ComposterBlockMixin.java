@@ -70,12 +70,14 @@ public class ComposterBlockMixin {
     @Inject(method = "insertItem", at = @At(value = "HEAD"), cancellable = true)
     private static void jinxedlib_insertItem(Entity pEntity, BlockState pState, ServerLevel pLevel, ItemStack pStack, BlockPos pPos, CallbackInfoReturnable<BlockState> cir) {
         int i = pState.getValue(ComposterBlock.LEVEL);
-        if (i < 7 && CompostableUtils.getCompostableValue(pLevel.registryAccess(), pStack) > 0.0F) {
-            BlockState blockstate = addItem(pEntity, pState, pLevel, pPos, pStack);
-            pStack.shrink(1);
-            cir.setReturnValue(blockstate);
-        } else {
-            cir.setReturnValue(pState);
+        if (CompostableUtils.isItemCompostable(pLevel.registryAccess(), pStack)) {
+            if (i < 7 && CompostableUtils.getCompostableValue(pLevel.registryAccess(), pStack) > 0.0F) {
+                BlockState blockstate = addItem(pEntity, pState, pLevel, pPos, pStack);
+                pStack.shrink(1);
+                cir.setReturnValue(blockstate);
+            } else {
+                cir.setReturnValue(pState);
+            }
         }
     }
 }
