@@ -7,7 +7,6 @@
   "mixins": [
     "BlockEntityTypeMixin",
     "ComposterBlockMixin",
-    "HoneyCombItemMixin",
     "VillagerMixin",
     "WoodTypeMixin",
     "WorkAtComposterMixin"

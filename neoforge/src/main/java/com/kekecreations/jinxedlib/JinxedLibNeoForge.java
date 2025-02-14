@@ -2,7 +2,6 @@ package com.kekecreations.jinxedlib;
 
 
 import com.kekecreations.jinxedlib.common.data.Compostables;
-import com.kekecreations.jinxedlib.common.data.Waxables;
 import com.kekecreations.jinxedlib.core.registry.JinxedDatapackRegistries;
 import com.kekecreations.jinxedlib.core.registry.JinxedSpriteSources;
 import net.neoforged.api.distmarker.Dist;
@@ -25,6 +24,5 @@ public class JinxedLibNeoForge {
 
     public void datapackRegistry(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(JinxedDatapackRegistries.COMPOSTABLES, Compostables.CODEC);
-        event.dataPackRegistry(JinxedDatapackRegistries.WAXABLES, Waxables.CODEC);
     }
 }
