@@ -4,6 +4,13 @@
   "package": "com.kekecreations.jinxedlib.core.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "FlammableFenceBlockMixin",
+    "FlammableFenceGateBlockMixin",
+    "FlammableLeavesBlockMixin",
+    "FlammablePlankBlockMixin",
+    "FlammableRotatedPillarBlockMixin",
+    "FlammableSlabBlockMixin",
+    "FlammableStairBlockMixin"
   ],
   "client": [
   ],
