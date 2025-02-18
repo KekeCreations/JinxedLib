@@ -17,14 +17,14 @@ public class JinxedSignUtils {
     /**
      * This method adds the sign to the isValid method (Fixes sign blocks being invisible)
      */
-    public static void isSignValid(Block block) {
+    public static void makeSignValid(Block block) {
         SIGN_IS_VALID.add(block);
     }
 
     /**
      * This method adds the hanging sign to the isValid method (Fixes sign blocks being invisible)
      */
-    public static void isHangingSignValid(Block block) {
+    public static void makeHangingSignValid(Block block) {
         HANGING_SIGN_IS_VALID.add(block);
     }
 }

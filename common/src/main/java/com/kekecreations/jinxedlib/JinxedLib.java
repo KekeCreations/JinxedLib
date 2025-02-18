@@ -2,7 +2,7 @@ package com.kekecreations.jinxedlib;
 
 import com.kekecreations.jinxedlib.core.registry.JinxedDatapackRegistries;
 import com.kekecreations.jinxedlib.core.util.JinxedCreativeCategoryUtils;
-import com.kekecreations.jinxedlib.examples.JinxedExamples;
+import com.kekecreations.jinxedlib.examples.JinxedRegistryExamples;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ public class JinxedLib {
     public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
 
     public static void init() {
-        JinxedExamples.loadExampleClass();
+        JinxedRegistryExamples.loadExampleClass();
 
         JinxedDatapackRegistries.register();
         JinxedCreativeCategoryUtils.addVanillaDyesToColourOrder();

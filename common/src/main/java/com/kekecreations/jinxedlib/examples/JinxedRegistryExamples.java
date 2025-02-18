@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.function.Supplier;
 
-public class JinxedExamples {
+public class JinxedRegistryExamples {
 
     //-------------------------BLOCK EXAMPLES-------------------------------------------------------------------------------------------------------------------------------------------------------
 
