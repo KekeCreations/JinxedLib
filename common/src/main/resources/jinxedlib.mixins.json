@@ -10,11 +10,12 @@
     "BlockEntityTypeMixin",
     "ComposterBlockMixin",
     "VillagerMixin",
-    "WoodTypeMixin",
+    "WoodTypeInvoker",
     "WorkAtComposterMixin"
   ],
   "client": [
-    "SpriteSourcesMixin"
+    "ItemPropertiesInvoker",
+    "SpriteSourcesInvoker"
   ],
   "server": [],
   "injectors": {

@@ -1,14 +1,13 @@
 package com.kekecreations.jinxedlib.core.util;
 
 import com.kekecreations.jinxedlib.JinxedLib;
-import com.kekecreations.jinxedlib.core.mixin.SpriteSourcesMixin;
-import com.kekecreations.jinxedlib.core.mixin.WoodTypeMixin;
+import com.kekecreations.jinxedlib.core.mixin.SpriteSourcesInvoker;
+import com.kekecreations.jinxedlib.core.mixin.WoodTypeInvoker;
 import com.kekecreations.jinxedlib.core.platform.Services;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.client.renderer.texture.atlas.SpriteSourceType;
 import net.minecraft.core.Registry;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -25,7 +24,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 
 public class JinxedRegistryUtils {
 
@@ -68,7 +66,7 @@ public class JinxedRegistryUtils {
      * @param woodType Your custom wood type
      */
     public static WoodType registerWoodType(WoodType woodType) {
-        return WoodTypeMixin.invokeRegister(woodType);
+        return WoodTypeInvoker.invokeRegister(woodType);
     }
 
     /**
@@ -121,7 +119,7 @@ public class JinxedRegistryUtils {
      * @param codec A map codec that extends the Sprite Source class
      */
     public static SpriteSourceType registerSpriteSource(String id, MapCodec<? extends SpriteSource> codec) {
-        return SpriteSourcesMixin.invokeRegister(id, codec);
+        return SpriteSourcesInvoker.invokeRegister(id, codec);
     }
 
     static {
