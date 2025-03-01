@@ -3,3 +3,5 @@ V1.0.1
 - Renamed JinxedRegistryUtils to JinxedRegistryHelper
 - Renamed JinxedSignUtils to JinxedSignHelper
 - Updated mod description to include links
+- The mod now works on 1.21.1
+- Dropped support for 1.21
