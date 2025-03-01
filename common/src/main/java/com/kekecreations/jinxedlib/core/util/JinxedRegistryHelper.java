@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class JinxedRegistryUtils {
+public class JinxedRegistryHelper {
 
     /**
      * This method allows you to make your own registry methods (like the ones in this class!)

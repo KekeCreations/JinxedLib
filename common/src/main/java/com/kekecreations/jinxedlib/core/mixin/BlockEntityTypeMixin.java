@@ -1,6 +1,6 @@
 package com.kekecreations.jinxedlib.core.mixin;
 
-import com.kekecreations.jinxedlib.core.util.JinxedSignUtils;
+import com.kekecreations.jinxedlib.core.util.JinxedSignHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,14 +16,14 @@ public class BlockEntityTypeMixin {
     private void jinxedlib_isValid(BlockState state, CallbackInfoReturnable<Boolean> cir) {
         var $this = (BlockEntityType) (Object) this;
         if ($this == BlockEntityType.SIGN) {
-            for (Block block : JinxedSignUtils.SIGN_IS_VALID) {
+            for (Block block : JinxedSignHelper.SIGN_IS_VALID) {
                 if (state.is(block)) {
                     cir.setReturnValue(true);
                 }
             }
         }
         if ($this == BlockEntityType.HANGING_SIGN) {
-            for (Block block : JinxedSignUtils.HANGING_SIGN_IS_VALID) {
+            for (Block block : JinxedSignHelper.HANGING_SIGN_IS_VALID) {
                 if (state.is(block)) {
                     cir.setReturnValue(true);
                 }

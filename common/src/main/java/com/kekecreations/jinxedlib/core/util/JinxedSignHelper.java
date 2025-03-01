@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JinxedSignUtils {
+public class JinxedSignHelper {
 
     /**
      * These lists allow you to add your custom sign to the isValid method (Fixes sign blocks being invisible)
@@ -18,13 +18,17 @@ public class JinxedSignUtils {
      * This method adds the sign to the isValid method (Fixes sign blocks being invisible)
      */
     public static void makeSignValid(Block block) {
-        SIGN_IS_VALID.add(block);
+        if (!SIGN_IS_VALID.contains(block)) {
+            SIGN_IS_VALID.add(block);
+        }
     }
 
     /**
      * This method adds the hanging sign to the isValid method (Fixes sign blocks being invisible)
      */
     public static void makeHangingSignValid(Block block) {
-        HANGING_SIGN_IS_VALID.add(block);
+        if (!HANGING_SIGN_IS_VALID.contains(block)) {
+            HANGING_SIGN_IS_VALID.add(block);
+        }
     }
 }

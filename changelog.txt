@@ -1,0 +1,5 @@
+V1.0.1
+- Made JinxedSignUtils methods better
+- Renamed JinxedRegistryUtils to JinxedRegistryHelper
+- Renamed JinxedSignUtils to JinxedSignHelper
+- Updated mod description to include links
