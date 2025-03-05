@@ -15,7 +15,9 @@ public abstract class AbstractFurnaceBlockEntityMixin {
     private void jinxedlib_burn(ItemStack pStack, CallbackInfoReturnable<Integer> cir) {
         AbstractFurnaceBlockEntity $this = (AbstractFurnaceBlockEntity) (Object) this;
         if ($this.getLevel() != null) {
-            cir.setReturnValue(FurnaceFuelUtils.getBurnTime($this.getLevel().registryAccess(), pStack));
+            if (FurnaceFuelUtils.isItemFurnaceFuel($this.getLevel().registryAccess(), pStack)) {
+                cir.setReturnValue(FurnaceFuelUtils.getBurnTime($this.getLevel().registryAccess(), pStack));
+            }
         }
     }
 

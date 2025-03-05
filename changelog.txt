@@ -1,3 +1,8 @@
+V1.0.2
+- Fixed Furnace Fuel Override
+
+
+
 V1.0.1
 - Made JinxedSignUtils methods better
 - Renamed JinxedRegistryUtils to JinxedRegistryHelper

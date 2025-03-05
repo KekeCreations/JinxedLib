@@ -21,7 +21,9 @@ public class AbstractFurnaceMenuMixin {
     @Inject(method = "isFuel", at = @At(value = "HEAD"), cancellable = true)
     private void jinxedlib_isFuel(ItemStack pStack, CallbackInfoReturnable<Boolean> cir) {
         if (!level.isClientSide()) {
-            cir.setReturnValue(FurnaceFuelUtils.isItemFurnaceFuel(level.registryAccess(), pStack));
+            if (FurnaceFuelUtils.isItemFurnaceFuel(level.registryAccess(), pStack)) {
+                cir.setReturnValue(true);
+            }
         }
     }
 }
