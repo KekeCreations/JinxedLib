@@ -1,3 +1,9 @@
+V1.0.3
+- Fixed JinxedLib crashing when AppliedEnergistics 2 Manual was opened
+
+
+
+
 V1.0.2
 - Fixed Furnace Fuel Override
 

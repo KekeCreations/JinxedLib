@@ -14,7 +14,7 @@ public abstract class AbstractFurnaceBlockEntityMixin {
     @Inject(method = "getBurnDuration", at = @At(value = "HEAD"), cancellable = true)
     private void jinxedlib_burn(ItemStack pStack, CallbackInfoReturnable<Integer> cir) {
         AbstractFurnaceBlockEntity $this = (AbstractFurnaceBlockEntity) (Object) this;
-        if ($this.getLevel() != null) {
+        if ($this.getLevel() != null && !$this.getLevel().isClientSide()) {
             if (FurnaceFuelUtils.isItemFurnaceFuel($this.getLevel().registryAccess(), pStack)) {
                 cir.setReturnValue(FurnaceFuelUtils.getBurnTime($this.getLevel().registryAccess(), pStack));
             }
