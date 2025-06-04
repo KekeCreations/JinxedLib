@@ -1,6 +1,6 @@
 package com.kekecreations.jinxedlib.platform;
 
-import com.kekecreations.jinxedlib.platform.services.IPlatformHelper;
+import com.kekecreations.jinxedlib.core.platform.services.IPlatformHelper;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 

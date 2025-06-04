@@ -1,12 +1,14 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "com.kekecreations.jinxedlib.mixin",
+    "package": "com.kekecreations.jinxedlib.core.mixin",
     "refmap": "${mod_id}.refmap.json",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
+        "WoodTypeInvoker"
     ],
     "client": [
+        "SpriteSourcesInvoker"
     ],
     "server": [
     ],
