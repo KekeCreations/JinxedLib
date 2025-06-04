@@ -1,6 +1,7 @@
 package com.kekecreations.jinxedlib;
 
 import com.kekecreations.jinxedlib.core.examples.JinxedRegistryExamples;
+import com.kekecreations.jinxedlib.core.registry.JinxedDatapackRegistries;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,9 @@ public class JinxedLib {
 
 
     public static void init() {
+        JinxedDatapackRegistries.register();
+
+
         JinxedRegistryExamples.loadExampleClass();
     }
 
