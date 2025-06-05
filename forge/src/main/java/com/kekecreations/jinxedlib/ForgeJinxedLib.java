@@ -1,5 +1,6 @@
 package com.kekecreations.jinxedlib;
 
+import com.kekecreations.jinxedlib.common.data.Compostables;
 import com.kekecreations.jinxedlib.common.data.FurnaceFuels;
 import com.kekecreations.jinxedlib.core.registry.JinxedDatapackRegistries;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,5 +21,6 @@ public class ForgeJinxedLib {
 
     public void datapackRegistry(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(JinxedDatapackRegistries.FURNACE_FUELS, FurnaceFuels.CODEC);
+        event.dataPackRegistry(JinxedDatapackRegistries.COMPOSTABLES, Compostables.CODEC);
     }
 }

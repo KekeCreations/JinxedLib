@@ -8,6 +8,7 @@
     "AbstractFurnaceBlockEntityMixin",
     "AbstractFurnaceMenuMixin",
     "BlockEntityTypeMixin",
+    "ComposterBlockMixin",
     "WoodTypeInvoker"
   ],
   "client": [

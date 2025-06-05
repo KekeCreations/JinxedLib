@@ -1,5 +1,6 @@
 package com.kekecreations.jinxedlib;
 
+import com.kekecreations.jinxedlib.common.data.Compostables;
 import com.kekecreations.jinxedlib.common.data.FurnaceFuels;
 import com.kekecreations.jinxedlib.core.registry.JinxedDatapackRegistries;
 import net.fabricmc.api.ModInitializer;
@@ -12,5 +13,6 @@ public class FabricJinxedLib implements ModInitializer {
         JinxedLib.init();
 
         DynamicRegistries.register(JinxedDatapackRegistries.FURNACE_FUELS, FurnaceFuels.CODEC);
+        DynamicRegistries.register(JinxedDatapackRegistries.COMPOSTABLES, Compostables.CODEC);
     }
 }
