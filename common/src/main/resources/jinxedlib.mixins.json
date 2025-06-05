@@ -12,6 +12,7 @@
     "WoodTypeInvoker"
   ],
   "client": [
+    "ItemPropertiesInvoker",
     "SpriteSourcesInvoker"
   ],
   "server": [
