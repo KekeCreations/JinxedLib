@@ -16,7 +16,7 @@ public class JinxedLib {
         JinxedDatapackRegistries.register();
 
 
-        JinxedRegistryExamples.loadExampleClass();
+        //JinxedRegistryExamples.loadExampleClass();
     }
 
     /**
