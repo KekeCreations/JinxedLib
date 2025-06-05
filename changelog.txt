@@ -1,3 +1,14 @@
+V1.0.0-1.20.1
+- Backported Registry Utils
+- Backported Common & Flammable classes
+- Backported Creative Category Utils
+- Backported Data Driven Furnace Fuels
+- Backported Data Driven Compostables (No Villager Compostables)
+- Backported Invokers
+
+
+
+
 V1.0.3
 - Fixed JinxedLib crashing when AppliedEnergistics 2 Manual was opened
 
