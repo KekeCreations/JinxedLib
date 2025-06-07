@@ -23,6 +23,7 @@ public class ForgeJinxedLib {
         }
 
         modEventBus.addListener(this::datapackRegistry);
+
     }
 
     public void datapackRegistry(DataPackRegistryEvent.NewRegistry event) {

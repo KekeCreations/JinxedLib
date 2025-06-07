@@ -2,7 +2,11 @@ package com.kekecreations.jinxedlib.core.examples;
 
 import com.kekecreations.jinxedlib.JinxedLib;
 import com.kekecreations.jinxedlib.core.util.JinxedRegistryHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -43,6 +47,23 @@ public class JinxedRegistryExamples {
     }
 
 
+    public static final Supplier<CreativeModeTab> CONFIG_TAB = JinxedRegistryHelper.registerCreativeModeTab("apple", "configurable_tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+            .title(Component.translatable("tab." + "apple" + ".configurable_tab"))
+            .icon(() -> new ItemStack(Items.STICK))
+            .displayItems((params, pOutput) -> {
+                pOutput.accept(Items.CALCITE);
+            })
+            .build()
+    );
+
+    public static final Supplier<CreativeModeTab> CONFIG_TAB_2 = JinxedRegistryHelper.registerCreativeModeTab("dog", "configurable_tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+            .title(Component.translatable("tab." + "dog" + ".configurable_tab"))
+            .icon(() -> new ItemStack(Items.STICK))
+            .displayItems((params, pOutput) -> {
+                pOutput.accept(Items.CALCITE);
+            })
+            .build()
+    );
 
 
     //IGNORE

@@ -3,7 +3,10 @@ package com.kekecreations.jinxedlib.platform;
 import com.kekecreations.jinxedlib.core.platform.services.IRegistryHelper;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistry;
@@ -14,6 +17,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class ForgeRegistryHelper implements IRegistryHelper {
+    IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
     private static final RegistryMap registryMap = new RegistryMap();
 
@@ -39,5 +43,12 @@ public class ForgeRegistryHelper implements IRegistryHelper {
             return reg != null ? reg.register(name, entry) : null;
         }
 
+    }
+
+    @Override
+    public <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String modID, String id, Supplier<T> tabSupplier) {
+        DeferredRegister<CreativeModeTab> tabRegistry = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, modID);
+        tabRegistry.register(modEventBus);
+        return tabRegistry.register(id, tabSupplier);
     }
 }

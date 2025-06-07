@@ -1,3 +1,9 @@
+V1.0.1-1.20.1
+- Fixed Creative Category Utils
+- Added Creative Tabs Registry Method
+
+
+
 V1.0.0-1.20.1
 - Backported Registry Utils
 - Backported Common & Flammable classes

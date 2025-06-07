@@ -12,6 +12,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -26,6 +27,16 @@ public class JinxedRegistryHelper {
      */
     public static <T> Supplier<T> register(Registry<? super T> registry, String modID, String name, Supplier<T> supplier) {
         return Services.REGISTRY.register(registry, modID, name, supplier);
+    }
+
+    /**
+     * This method allows you to register an item
+     * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
+     * @param name Name of your tab (for example: gold_sword)
+     * @param supplier () -> new tab
+     */
+    public static <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String modID, String name, Supplier<T> supplier) {
+        return Services.REGISTRY.registerCreativeModeTab(modID, name, supplier);
     }
 
     /**
