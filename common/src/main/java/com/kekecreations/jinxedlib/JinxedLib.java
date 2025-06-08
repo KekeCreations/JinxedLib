@@ -19,7 +19,7 @@ public class JinxedLib {
         JinxedCreativeCategoryHelper.addVanillaDyesToColourOrder();
 
 
-       // JinxedRegistryExamples.loadExampleClass();
+        //JinxedRegistryExamples.loadExampleClass();
     }
 
     /**

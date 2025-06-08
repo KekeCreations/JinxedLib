@@ -11,6 +11,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.RegistryManager;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,9 +22,19 @@ public class ForgeRegistryHelper implements IRegistryHelper {
 
     private static final RegistryMap registryMap = new RegistryMap();
 
+
     @Override
-    public <T> Supplier<T> register(Registry<? super T> registry, String modID, String name, Supplier<T> entry) {
-        return registryMap.register(modID, registry, name, entry);
+    public <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String modID, String id, Supplier<T> tabSupplier) {
+        DeferredRegister<CreativeModeTab> tabRegistry = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, modID);
+        tabRegistry.register(modEventBus);
+        return tabRegistry.register(id, tabSupplier);
+    }
+
+    @Override
+    public <T> Supplier<T> register(Registry<T> registry, String modid, String id, Supplier<T> supplier) {
+        DeferredRegister<T> objectRegistry = DeferredRegister.create(registry.key(), modid);
+        objectRegistry.register(modEventBus);
+        return objectRegistry.register(id, supplier);
     }
 
 
@@ -32,7 +43,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
         private final Map<Pair<String, ResourceLocation>, DeferredRegister<?>> registries = new HashMap<>();
 
         @SuppressWarnings({"unchecked", "rawtypes"})
-        private <T> Supplier<T> register(String modID, Registry<? super T> registry, String name, Supplier<T> entry) {
+        private <T> RegistryObject<T> register(String modID, Registry<? super T> registry, String name, Supplier<T> entry) {
             DeferredRegister<T> reg = (DeferredRegister<T>)registries.computeIfAbsent(Pair.of(modID, registry.key().location()), (key) -> {
                 ForgeRegistry forgeReg = RegistryManager.ACTIVE.getRegistry(key.getSecond());
                 if (forgeReg == null) return null;
@@ -43,12 +54,5 @@ public class ForgeRegistryHelper implements IRegistryHelper {
             return reg != null ? reg.register(name, entry) : null;
         }
 
-    }
-
-    @Override
-    public <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String modID, String id, Supplier<T> tabSupplier) {
-        DeferredRegister<CreativeModeTab> tabRegistry = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, modID);
-        tabRegistry.register(modEventBus);
-        return tabRegistry.register(id, tabSupplier);
     }
 }

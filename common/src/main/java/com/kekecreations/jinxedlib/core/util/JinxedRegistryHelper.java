@@ -25,7 +25,7 @@ public class JinxedRegistryHelper {
     /**
      * This method allows you to make your own registry methods (like the ones in this class!)
      */
-    public static <T> Supplier<T> register(Registry<? super T> registry, String modID, String name, Supplier<T> supplier) {
+    public static <T> Supplier<T> register(Registry<T> registry, String modID, String name, Supplier<T> supplier) {
         return Services.REGISTRY.register(registry, modID, name, supplier);
     }
 
@@ -45,7 +45,7 @@ public class JinxedRegistryHelper {
      * @param name Name of your item (for example: gold_sword)
      * @param supplier () -> new item
      */
-    public static <T extends Item> Supplier<T> registerItem(String modID, String name, Supplier<T> supplier) {
+    public static Supplier<Item> registerItem(String modID, String name, Supplier<Item> supplier) {
         return Services.REGISTRY.register(BuiltInRegistries.ITEM, modID, name, supplier);
     }
 
@@ -57,7 +57,7 @@ public class JinxedRegistryHelper {
      * @param hasItem Should the block have a block item?
      * @param supplier () -> new block
      */
-    public static <T extends Block> Supplier<T> registerBlock(String modID, String name, boolean hasItem, Supplier<T> supplier) {
+    public static  Supplier<Block> registerBlock(String modID, String name, boolean hasItem, Supplier<Block> supplier) {
         var block = Services.REGISTRY.register(BuiltInRegistries.BLOCK, modID, name, supplier);
         if (hasItem) {
             registerItem(modID, name, () -> new BlockItem(block.get(), new Item.Properties()));
