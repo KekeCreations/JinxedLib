@@ -1,41 +1,22 @@
 package com.kekecreations.jinxedlib.core.platform;
 
 import com.kekecreations.jinxedlib.core.platform.services.IRegistryHelper;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public class NeoForgeRegistryHelper implements IRegistryHelper {
-    private static final RegistryMap registryMap = new RegistryMap();
+    IEventBus modEventBus = ModLoadingContext.get().getActiveContainer().getEventBus();
 
     @Override
-    public <T> Supplier<T> register(Registry<? super T> registry, String modID, String name, Supplier<T> entry) {
-        return registryMap.register(modID, registry, name, entry);
-    }
+    public <T> Supplier<T> register(Registry<T> registry, String modID, String name, Supplier<T> entry) {
+        DeferredRegister<T> deferredRegister = DeferredRegister.create(registry.key(), modID);
+        deferredRegister.register(modEventBus);
 
-
-    private static class RegistryMap {
-
-        private final Map<Pair<String, ResourceLocation>, DeferredRegister<?>> registries = new HashMap<>();
-
-        @SuppressWarnings({"unchecked", "rawtypes"})
-        private <T> Supplier<T> register(String modID, Registry<? super T> registry, String name, Supplier<T> entry) {
-            DeferredRegister<T> reg = (DeferredRegister<T>)registries.computeIfAbsent(Pair.of(modID, registry.key().location()), (key) -> {
-                Registry forgeReg = BuiltInRegistries.REGISTRY.get(key.getSecond());
-                if (forgeReg == null) return null;
-                DeferredRegister<T> defReg = DeferredRegister.create(forgeReg, key.getFirst());
-                defReg.register(ModLoadingContext.get().getActiveContainer().getEventBus());
-                return defReg;
-            });
-            return reg != null ? reg.register(name, entry) : null;
-        }
+        return deferredRegister.register(name, entry);
     }
 }
 

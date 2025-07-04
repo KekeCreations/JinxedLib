@@ -1,3 +1,9 @@
+### V1.0.4
+- Fixed registries crashing when multiple mods use JinxedLib
+A special thanks to Yirmiri for helping me fix this!
+
+
+
 V1.0.3
 - Fixed JinxedLib crashing when AppliedEnergistics 2 Manual was opened
 

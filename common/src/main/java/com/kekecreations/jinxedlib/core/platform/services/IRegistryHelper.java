@@ -5,6 +5,6 @@ import net.minecraft.core.Registry;
 import java.util.function.Supplier;
 
 public interface IRegistryHelper {
-    <T> Supplier<T> register(Registry<? super T> registry, String modID, String name, Supplier<T> entry);
+    <T> Supplier<T> register(Registry<T> registry, String modID, String name, Supplier<T> entry);
 
 }
