@@ -1,9 +1,17 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.kekecreations.jinxedlib.mixin",
+  "package": "com.kekecreations.jinxedlib.core.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "FlammableFenceBlockMixin",
+    "FlammableFenceGateBlockMixin",
+    "FlammableLeavesBlockMixin",
+    "FlammablePlankBlockMixin",
+    "FlammableRotatedPillarBlockMixin",
+    "FlammableSlabBlockMixin",
+    "FlammableStairBlockMixin"
+  ],
   "client": [
   ],
   "server": [],
