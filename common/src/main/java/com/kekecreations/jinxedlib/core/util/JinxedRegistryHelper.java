@@ -1,9 +1,8 @@
 package com.kekecreations.jinxedlib.core.util;
 
 import com.kekecreations.jinxedlib.JinxedLib;
+import com.kekecreations.jinxedlib.core.mixin.WoodTypeInvoker;
 import com.kekecreations.jinxedlib.core.platform.Services;
-import com.mojang.serialization.MapCodec;
-import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -62,12 +61,10 @@ public class JinxedRegistryHelper {
      * This method allows you to register custom wood types
      * @param woodType Your custom wood type
      */
-    /*
+
     public static WoodType registerWoodType(WoodType woodType) {
         return WoodTypeInvoker.invokeRegister(woodType);
     }
-
-     */
 
     /**
      * This method allows you to register custom tree growers
@@ -111,19 +108,6 @@ public class JinxedRegistryHelper {
         return IMMUTABLE_LOCATIONS;
     }
 
-
-    /**
-     * This method allows you to register sprite sources but under the Minecraft namespace
-     * Its recommended you put your mod ID in front of the sprite source name (for example: jinxedlib_sprite_source)
-     * @param id The identifier of your custom sprite source
-     * @param codec A map codec that extends the Sprite Source class
-     */
-    /*
-    public static SpriteSourceType registerSpriteSource(String id, MapCodec<? extends SpriteSource> codec) {
-        return SpriteSourcesInvoker.invokeRegister(id, codec);
-    }
-
-     */
 
     static {
         IMMUTABLE_LOCATIONS = Collections.unmodifiableSet(LOCATIONS);
