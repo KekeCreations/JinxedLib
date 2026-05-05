@@ -1,4 +1,4 @@
-package com.kekecreations.jinxedlib.platform.services;
+package com.kekecreations.jinxedlib.core.platform.services;
 
 public interface IPlatformHelper {
 

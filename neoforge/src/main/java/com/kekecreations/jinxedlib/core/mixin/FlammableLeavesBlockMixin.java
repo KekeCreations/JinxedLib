@@ -9,10 +9,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(FlammableLeavesBlock.class)
-public class FlammableLeavesBlockMixin extends LeavesBlock  {
+public abstract class FlammableLeavesBlockMixin extends LeavesBlock  {
 
-    public FlammableLeavesBlockMixin(Properties p_49795_) {
-        super(p_49795_);
+
+    public FlammableLeavesBlockMixin(float leafParticleChance, Properties properties) {
+        super(leafParticleChance, properties);
     }
 
     @Override
