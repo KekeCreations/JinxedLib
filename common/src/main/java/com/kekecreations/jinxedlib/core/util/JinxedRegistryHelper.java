@@ -108,8 +108,7 @@ public class JinxedRegistryHelper {
     }
 
     /**
-     * This method allows you to register sprite sources but under the Minecraft namespace
-     * Its recommended you put your mod ID in front of the sprite source name (for example: jinxedlib_sprite_source)
+     * This method allows you to register sprite sources
      * @param id The identifier of your custom sprite source
      * @param codec A map codec that extends the Sprite Source class
      */
