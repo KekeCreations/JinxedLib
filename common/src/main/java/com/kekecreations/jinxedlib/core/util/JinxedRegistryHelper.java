@@ -17,14 +17,24 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.grower.TreeGrower;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.storage.loot.LootTable;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class JinxedRegistryHelper {
+
+    public static ResourceKey<Block> blockKey(Identifier identifier) {
+        return ResourceKey.create(Registries.BLOCK, identifier);
+    }
+
+    public static ResourceKey<Item> itemKey(String id, String name) {
+        return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(id, name));
+    }
 
     /**
      * This method allows you to make your own registry methods (like the ones in this class!)
@@ -52,7 +62,17 @@ public class JinxedRegistryHelper {
      * @param supplier () -> new block
      */
     public static Supplier<Block> registerBlock(String modID, String name, boolean hasItem, Supplier<Block> supplier) {
+        supplier.get().properties().setId(blockKey(Identifier.fromNamespaceAndPath(JinxedLib.MOD_ID, name)));
         var block = Services.REGISTRY.register(BuiltInRegistries.BLOCK, modID, name, supplier);
+        if (hasItem) {
+            registerItem(modID, name, () -> new BlockItem(block.get(), new Item.Properties()));
+        }
+        return block;
+    }
+
+    public static Supplier<Block> registerBlock(String modID, String name, boolean hasItem, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties) {
+        properties.setId(blockKey(Identifier.fromNamespaceAndPath("jinxedlib", name)));
+        var block = Services.REGISTRY.register(BuiltInRegistries.BLOCK, modID, name, () -> blockFactory.apply(properties));
         if (hasItem) {
             registerItem(modID, name, () -> new BlockItem(block.get(), new Item.Properties()));
         }
