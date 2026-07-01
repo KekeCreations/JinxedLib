@@ -7,6 +7,7 @@ Changes
 - Sprite Source Register method now takes in a mod ID
 - NeoForge loot modifiers have been moved to a common package
 - Several changes to mixins for them to work on 1.21.11
+- Way more registry methods for modders!
 
 
 

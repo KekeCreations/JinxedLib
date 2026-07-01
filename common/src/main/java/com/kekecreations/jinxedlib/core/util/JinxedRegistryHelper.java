@@ -28,12 +28,32 @@ import java.util.function.Supplier;
 
 public class JinxedRegistryHelper {
 
+    /**
+     * This method allows you to easily get a block key for registry
+     */
+    public static ResourceKey<Block> blockKey(String id, String name) {
+        return ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(id, name));
+    }
+
+    /**
+     * This method allows you to easily get a block key for registry
+     */
     public static ResourceKey<Block> blockKey(Identifier identifier) {
         return ResourceKey.create(Registries.BLOCK, identifier);
     }
 
+    /**
+     * This method allows you to easily get an item key for registry
+     */
     public static ResourceKey<Item> itemKey(String id, String name) {
         return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(id, name));
+    }
+
+    /**
+     * This method allows you to easily get an item key for registry
+     */
+    public static ResourceKey<Item> itemKey(Identifier identifier) {
+        return ResourceKey.create(Registries.ITEM, identifier);
     }
 
     /**
@@ -47,10 +67,28 @@ public class JinxedRegistryHelper {
      * This method allows you to register an item
      * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
      * @param name Name of your item (for example: gold_sword)
-     * @param supplier () -> new item
+     */
+    public static Supplier<Item> registerItem(String modID, String name,  Function<Item.Properties, Item> itemFactory, Item.Properties properties) {
+        properties.setId(itemKey(modID, name));
+        return Services.REGISTRY.register(BuiltInRegistries.ITEM, modID, name, () -> itemFactory.apply(properties));
+    }
+
+    /**
+     * This method is an alternative way to register items which is useful for items such as a block item!
+     * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
+     * @param name Name of your item (for example: gold_sword)
      */
     public static Supplier<Item> registerItem(String modID, String name, Supplier<Item> supplier) {
         return Services.REGISTRY.register(BuiltInRegistries.ITEM, modID, name, supplier);
+    }
+
+    /**
+     * This method allows you to register an item
+     * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
+     * @param name Name of your item (for example: gold_sword)
+     */
+    public static Supplier<Item> registerItem(String modID, String name,  Function<Identifier, ? extends Item> function) {
+        return Services.REGISTRY.register(BuiltInRegistries.ITEM, modID, name, () -> function.apply(Identifier.fromNamespaceAndPath(modID, name)));
     }
 
 
@@ -59,22 +97,26 @@ public class JinxedRegistryHelper {
      * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
      * @param name Name of your block (for example: gold_block)
      * @param hasItem Should the block have a block item?
-     * @param supplier () -> new block
      */
-    public static Supplier<Block> registerBlock(String modID, String name, boolean hasItem, Supplier<Block> supplier) {
-        supplier.get().properties().setId(blockKey(Identifier.fromNamespaceAndPath(JinxedLib.MOD_ID, name)));
-        var block = Services.REGISTRY.register(BuiltInRegistries.BLOCK, modID, name, supplier);
+    public static Supplier<Block> registerBlock(String modID, String name, boolean hasItem, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties) {
+        properties.setId(blockKey(modID, name));
+        var block = Services.REGISTRY.register(BuiltInRegistries.BLOCK, modID, name, () -> blockFactory.apply(properties));
         if (hasItem) {
-            registerItem(modID, name, () -> new BlockItem(block.get(), new Item.Properties()));
+            registerItem(modID, name, () -> new BlockItem(block.get(), new Item.Properties().setId(itemKey(modID, name))));
         }
         return block;
     }
 
-    public static Supplier<Block> registerBlock(String modID, String name, boolean hasItem, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties) {
-        properties.setId(blockKey(Identifier.fromNamespaceAndPath("jinxedlib", name)));
-        var block = Services.REGISTRY.register(BuiltInRegistries.BLOCK, modID, name, () -> blockFactory.apply(properties));
+    /**
+     * This method allows you to register block with or without block items
+     * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
+     * @param name Name of your block (for example: gold_block)
+     * @param hasItem Should the block have a block item?
+     */
+    public static Supplier<Block> registerBlock(String modID, String name, boolean hasItem, Function<Identifier, ? extends Block> function) {
+        var block = Services.REGISTRY.register(BuiltInRegistries.BLOCK, modID, name, () -> function.apply(Identifier.fromNamespaceAndPath(modID, name)));
         if (hasItem) {
-            registerItem(modID, name, () -> new BlockItem(block.get(), new Item.Properties()));
+            registerItem(modID, name, () -> new BlockItem(block.get(), new Item.Properties().setId(itemKey(modID, name))));
         }
         return block;
     }
