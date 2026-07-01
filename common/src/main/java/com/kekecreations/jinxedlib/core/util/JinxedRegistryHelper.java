@@ -1,8 +1,12 @@
 package com.kekecreations.jinxedlib.core.util;
 
 import com.kekecreations.jinxedlib.JinxedLib;
+import com.kekecreations.jinxedlib.core.mixin.SpriteSourcesInvoker;
 import com.kekecreations.jinxedlib.core.mixin.WoodTypeInvoker;
 import com.kekecreations.jinxedlib.core.platform.Services;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -103,6 +107,19 @@ public class JinxedRegistryHelper {
             throw new IllegalArgumentException(String.valueOf($$0.identifier()) + " is already a registered built-in loot table");
         }
     }
+
+    /**
+     * This method allows you to register sprite sources but under the Minecraft namespace
+     * Its recommended you put your mod ID in front of the sprite source name (for example: jinxedlib_sprite_source)
+     * @param id The identifier of your custom sprite source
+     * @param codec A map codec that extends the Sprite Source class
+     */
+    /*
+    public static Codec<SpriteSource> registerSpriteSource(String id, MapCodec<? extends SpriteSource> codec) {
+        return SpriteSourcesInvoker.invokeRegister(id, codec);
+    }
+
+     */
 
     public static Set<ResourceKey<LootTable>> all() {
         return IMMUTABLE_LOCATIONS;
