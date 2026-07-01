@@ -1,18 +1,18 @@
 package com.kekecreations.jinxedlib.core.mixin;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.client.renderer.texture.atlas.SpriteSources;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.ExtraCodecs;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Invoker;
+import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(SpriteSources.class)
-public interface SpriteSourcesInvoker {
+public interface SpriteSourcesAccessor {
 
-
-    @Invoker
-    static Codec<SpriteSource> invokeRegister(String string, MapCodec<? extends SpriteSource> spriteSource) {
+    @Accessor("ID_MAPPER")
+    static ExtraCodecs.LateBoundIdMapper<Identifier, MapCodec<? extends SpriteSource>> getIdMapper() {
         throw new AssertionError();
     }
 }

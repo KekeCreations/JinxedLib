@@ -1,7 +1,7 @@
 package com.kekecreations.jinxedlib.core.util;
 
 import com.kekecreations.jinxedlib.JinxedLib;
-import com.kekecreations.jinxedlib.core.mixin.SpriteSourcesInvoker;
+import com.kekecreations.jinxedlib.core.mixin.SpriteSourcesAccessor;
 import com.kekecreations.jinxedlib.core.mixin.WoodTypeInvoker;
 import com.kekecreations.jinxedlib.core.platform.Services;
 import com.mojang.serialization.Codec;
@@ -10,7 +10,9 @@ import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,10 +21,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.storage.loot.LootTable;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class JinxedRegistryHelper {
@@ -114,12 +113,10 @@ public class JinxedRegistryHelper {
      * @param id The identifier of your custom sprite source
      * @param codec A map codec that extends the Sprite Source class
      */
-    /*
-    public static Codec<SpriteSource> registerSpriteSource(String id, MapCodec<? extends SpriteSource> codec) {
-        return SpriteSourcesInvoker.invokeRegister(id, codec);
-    }
 
-     */
+    public static ExtraCodecs.LateBoundIdMapper<Identifier, MapCodec<? extends SpriteSource>> registerSpriteSource(String id, MapCodec<? extends SpriteSource> codec) {
+        return SpriteSourcesAccessor.getIdMapper().put(Identifier.fromNamespaceAndPath("jinxedlib", Objects.requireNonNull(id)), Objects.requireNonNull(codec));
+    }
 
     public static Set<ResourceKey<LootTable>> all() {
         return IMMUTABLE_LOCATIONS;

@@ -8,7 +8,7 @@
     "WoodTypeInvoker"
   ],
   "client": [
-    "SpriteSourcesMixin"
+    "SpriteSourcesAccessor"
   ],
   "server": [],
   "injectors": {

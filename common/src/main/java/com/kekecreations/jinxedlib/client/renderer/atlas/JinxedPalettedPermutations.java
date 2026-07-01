@@ -19,20 +19,15 @@ import net.minecraft.client.renderer.texture.atlas.SpriteResourceLoader;
 import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.client.renderer.texture.atlas.SpriteSources;
 import net.minecraft.client.renderer.texture.atlas.sources.LazyLoadedImage;
-import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
 import net.minecraft.client.resources.metadata.animation.FrameSize;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.ResourceMetadata;
 import net.minecraft.util.ARGB;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 
-@OnlyIn(Dist.CLIENT)
 public record JinxedPalettedPermutations(List<SpriteSource> textures, Identifier paletteKey, Map<String, Identifier> permutations, String separator) implements SpriteSource {
     static final Logger LOGGER = LogUtils.getLogger();
     public static final String DEFAULT_SEPARATOR = "_";
@@ -161,7 +156,6 @@ public record JinxedPalettedPermutations(List<SpriteSource> textures, Identifier
         return JinxedPalettedPermutations.CODEC;
     }
 
-    @OnlyIn(Dist.CLIENT)
     static record JinxedPalettedSpriteSupplier(LazyLoadedImage baseImage, Supplier<IntUnaryOperator> paletteSupplier, Identifier permutationLocation) implements SpriteSource.DiscardableLoader {
 
 

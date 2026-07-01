@@ -12,7 +12,6 @@ public class JinxedLibNeoForge {
 
     public JinxedLibNeoForge(IEventBus eventBus) {
         JinxedLib.init();
-
         if (FMLEnvironment.getDist() == Dist.CLIENT) {
             JinxedSpriteSources.register();
         }

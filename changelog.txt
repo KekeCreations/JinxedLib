@@ -1,3 +1,13 @@
+### V1.0.5
+- New mod icon
+- Port all features from 1.21.1 to 1.21.11 with some changes
+------
+Changes
+- Removed SpriteSourcesInvoker (Replaced by SpriteSourcesAccessor)
+- Sprite Source Register method now takes in a mod ID
+
+
+
 ### V1.0.4
 - Fixed registries crashing when multiple mods use JinxedLib
 A special thanks to Yirmiri for helping me fix this!
