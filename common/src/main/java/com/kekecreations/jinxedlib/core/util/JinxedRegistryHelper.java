@@ -114,8 +114,8 @@ public class JinxedRegistryHelper {
      * @param codec A map codec that extends the Sprite Source class
      */
 
-    public static ExtraCodecs.LateBoundIdMapper<Identifier, MapCodec<? extends SpriteSource>> registerSpriteSource(String id, MapCodec<? extends SpriteSource> codec) {
-        return SpriteSourcesAccessor.getIdMapper().put(Identifier.fromNamespaceAndPath("jinxedlib", Objects.requireNonNull(id)), Objects.requireNonNull(codec));
+    public static ExtraCodecs.LateBoundIdMapper<Identifier, MapCodec<? extends SpriteSource>> registerSpriteSource(Identifier id, MapCodec<? extends SpriteSource> codec) {
+        return SpriteSourcesAccessor.getIdMapper().put(Objects.requireNonNull(id), Objects.requireNonNull(codec));
     }
 
     public static Set<ResourceKey<LootTable>> all() {

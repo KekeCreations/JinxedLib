@@ -9,7 +9,7 @@ import net.minecraft.util.ExtraCodecs;
 
 public class JinxedSpriteSources {
 
-    public static ExtraCodecs.LateBoundIdMapper<Identifier, MapCodec<? extends SpriteSource>> PALETTED_PERMUTATIONS = JinxedRegistryHelper.registerSpriteSource("jinxedlib_paletted_permutations", JinxedPalettedPermutations.CODEC);
+    public static ExtraCodecs.LateBoundIdMapper<Identifier, MapCodec<? extends SpriteSource>> PALETTED_PERMUTATIONS = JinxedRegistryHelper.registerSpriteSource(Identifier.fromNamespaceAndPath("jinxedlib", "paletted_permutations"), JinxedPalettedPermutations.CODEC);
 
 
     public static void register() {}
