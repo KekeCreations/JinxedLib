@@ -4,6 +4,7 @@ package com.kekecreations.jinxedlib;
 import com.kekecreations.jinxedlib.common.data.Compostables;
 import com.kekecreations.jinxedlib.common.data.FurnaceFuels;
 import com.kekecreations.jinxedlib.core.registry.JinxedDatapackRegistries;
+import com.kekecreations.jinxedlib.core.registry.JinxedLootModifiers;
 import com.kekecreations.jinxedlib.core.registry.JinxedSpriteSources;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -16,6 +17,7 @@ public class JinxedLibNeoForge {
 
     public JinxedLibNeoForge(IEventBus eventBus) {
         JinxedLib.init();
+        JinxedLootModifiers.register(eventBus);
         if (FMLEnvironment.getDist() == Dist.CLIENT) {
             JinxedSpriteSources.register();
         }
