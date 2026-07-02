@@ -30,7 +30,7 @@ public class ComposterBlockMixin {
         return null;
     }
 
-    @Inject(method = "useItemOn", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "useItemOn", at = @At(value = "RETURN"), cancellable = true)
     private void jinxedlib_useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
         int i = state.getValue(ComposterBlock.LEVEL);
         if (i < 8) {
