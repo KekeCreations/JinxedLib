@@ -1,3 +1,9 @@
+### V1.0.6
+- Ported all features from V1.0.5 1.21.11 to V26.1.2
+
+
+
+
 ### V1.0.4
 - Fixed registries crashing when multiple mods use JinxedLib
 A special thanks to Yirmiri for helping me fix this!
