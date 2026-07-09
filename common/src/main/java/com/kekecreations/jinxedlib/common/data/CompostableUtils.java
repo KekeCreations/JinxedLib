@@ -10,18 +10,18 @@ public class CompostableUtils {
 
     public static Float getCompostableValue(RegistryAccess access, ItemStack stack) {
         Optional<Compostables> optionalPalette = access.lookupOrThrow(JinxedDatapackRegistries.COMPOSTABLES).stream().filter(
-                searchPalette -> searchPalette.values().containsKey(stack.getItemHolder())
+                searchPalette -> searchPalette.values().containsKey(stack.getItem().builtInRegistryHolder())
         ).findFirst();
         if (optionalPalette.isEmpty()) return 0.0F;
         Compostables palette = optionalPalette.get();
-        Float holder = palette.values().get(stack.getItemHolder());
+        Float holder = palette.values().get(stack.getItem().builtInRegistryHolder());
         if (holder.isNaN()) return 0.0F;
         return holder;
     }
 
     public static boolean isItemCompostable(RegistryAccess access, ItemStack stack) {
         Optional<Compostables> optionalPalette = access.lookupOrThrow(JinxedDatapackRegistries.COMPOSTABLES).stream().filter(
-                searchPalette -> searchPalette.values().containsKey(stack.getItemHolder())
+                searchPalette -> searchPalette.values().containsKey(stack.getItem().builtInRegistryHolder())
         ).findFirst();
         return optionalPalette.isPresent();
     }
@@ -30,6 +30,6 @@ public class CompostableUtils {
         Optional<Compostables> optionalPalette = access.lookupOrThrow(JinxedDatapackRegistries.COMPOSTABLES).stream().filter(
                 Compostables::canVillagerCompost
         ).findFirst();
-        return optionalPalette.stream().anyMatch(searchPalette -> searchPalette.values().containsKey(stack.getItemHolder()));
+        return optionalPalette.stream().anyMatch(searchPalette -> searchPalette.values().containsKey(stack.getItem().builtInRegistryHolder()));
     }
 }

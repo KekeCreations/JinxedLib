@@ -3,8 +3,17 @@
   "minVersion": "0.8",
   "package": "com.kekecreations.jinxedlib.core.mixin",
   "compatibilityLevel": "JAVA_25",
-  "mixins": [],
+  "mixins": [
+    "AbstractFurnaceBlockEntityMixin",
+    "AbstractFurnaceMenuMixin",
+    "BlockEntityTypeMixin",
+    "ComposterBlockMixin",
+    "VillagerMixin",
+    "WoodTypeInvoker",
+    "WorkAtComposterMixin"
+  ],
   "client": [
+    "SpriteSourcesAccessor"
   ],
   "server": [],
   "injectors": {

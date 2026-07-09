@@ -1,4 +1,4 @@
-package com.kekecreations.jinxedlib.platform;
+package com.kekecreations.jinxedlib.core.platform;
 
 import com.kekecreations.jinxedlib.core.platform.services.IPlatformHelper;
 import net.neoforged.fml.ModList;

@@ -1,0 +1,190 @@
+package com.kekecreations.jinxedlib.core.util;
+
+import com.kekecreations.jinxedlib.JinxedLib;
+import com.kekecreations.jinxedlib.core.mixin.SpriteSourcesAccessor;
+import com.kekecreations.jinxedlib.core.mixin.WoodTypeInvoker;
+import com.kekecreations.jinxedlib.core.platform.Services;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.client.renderer.texture.atlas.SpriteSource;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.grower.TreeGrower;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.storage.loot.LootTable;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+public class JinxedRegistryHelper {
+
+    /**
+     * This method allows you to easily get a block key for registry
+     */
+    public static ResourceKey<Block> blockKey(String id, String name) {
+        return ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(id, name));
+    }
+
+    /**
+     * This method allows you to easily get a block key for registry
+     */
+    public static ResourceKey<Block> blockKey(Identifier identifier) {
+        return ResourceKey.create(Registries.BLOCK, identifier);
+    }
+
+    /**
+     * This method allows you to easily get an item key for registry
+     */
+    public static ResourceKey<Item> itemKey(String id, String name) {
+        return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(id, name));
+    }
+
+    /**
+     * This method allows you to easily get an item key for registry
+     */
+    public static ResourceKey<Item> itemKey(Identifier identifier) {
+        return ResourceKey.create(Registries.ITEM, identifier);
+    }
+
+    /**
+     * This method allows you to make your own registry methods (like the ones in this class!)
+     */
+    public static <T> Supplier<T> register(Registry<T> registry, String modID, String name, Supplier<T> supplier) {
+        return Services.REGISTRY.register(registry, modID, name, supplier);
+    }
+
+    /**
+     * This method allows you to register an item
+     * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
+     * @param name Name of your item (for example: gold_sword)
+     */
+    public static Supplier<Item> registerItem(String modID, String name,  Function<Item.Properties, Item> itemFactory, Item.Properties properties) {
+        properties.setId(itemKey(modID, name));
+        return Services.REGISTRY.register(BuiltInRegistries.ITEM, modID, name, () -> itemFactory.apply(properties));
+    }
+
+    /**
+     * This method is an alternative way to register items which is useful for items such as a block item!
+     * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
+     * @param name Name of your item (for example: gold_sword)
+     */
+    public static Supplier<Item> registerItem(String modID, String name, Supplier<Item> supplier) {
+        return Services.REGISTRY.register(BuiltInRegistries.ITEM, modID, name, supplier);
+    }
+
+    /**
+     * This method allows you to register an item
+     * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
+     * @param name Name of your item (for example: gold_sword)
+     */
+    public static Supplier<Item> registerItem(String modID, String name,  Function<Identifier, ? extends Item> function) {
+        return Services.REGISTRY.register(BuiltInRegistries.ITEM, modID, name, () -> function.apply(Identifier.fromNamespaceAndPath(modID, name)));
+    }
+
+
+    /**
+     * This method allows you to register block with or without block items
+     * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
+     * @param name Name of your block (for example: gold_block)
+     * @param hasItem Should the block have a block item?
+     */
+    public static Supplier<Block> registerBlock(String modID, String name, boolean hasItem, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties) {
+        properties.setId(blockKey(modID, name));
+        var block = Services.REGISTRY.register(BuiltInRegistries.BLOCK, modID, name, () -> blockFactory.apply(properties));
+        if (hasItem) {
+            registerItem(modID, name, () -> new BlockItem(block.get(), new Item.Properties().setId(itemKey(modID, name))));
+        }
+        return block;
+    }
+
+    /**
+     * This method allows you to register block with or without block items
+     * @param modID Your mod Identifier (you can make a method so you don't have to input this all the time)
+     * @param name Name of your block (for example: gold_block)
+     * @param hasItem Should the block have a block item?
+     */
+    public static Supplier<Block> registerBlock(String modID, String name, boolean hasItem, Function<Identifier, ? extends Block> function) {
+        var block = Services.REGISTRY.register(BuiltInRegistries.BLOCK, modID, name, () -> function.apply(Identifier.fromNamespaceAndPath(modID, name)));
+        if (hasItem) {
+            registerItem(modID, name, () -> new BlockItem(block.get(), new Item.Properties().setId(itemKey(modID, name))));
+        }
+        return block;
+    }
+
+
+    /**
+     * This method allows you to register custom wood types
+     * @param woodType Your custom wood type
+     */
+
+    public static WoodType registerWoodType(WoodType woodType) {
+        return WoodTypeInvoker.invokeRegister(woodType);
+    }
+
+    /**
+     * This method allows you to register custom tree growers
+     * @param modID Your mod identifier
+     * @param name Your tree grower's name
+     * @param tree Optional tree feature
+     * @param secondaryTree Optional secondary tree feature
+     */
+    public static TreeGrower register(String modID, String name, Optional<ResourceKey<ConfiguredFeature<?, ?>>> tree, Optional<ResourceKey<ConfiguredFeature<?, ?>>> secondaryTree) {
+        return register(modID, name, 0, Optional.empty(), Optional.empty(), tree, secondaryTree, Optional.empty(), Optional.empty());
+    }
+
+    private static TreeGrower register(String modID, String name, float secondaryChance, Optional<ResourceKey<ConfiguredFeature<?, ?>>> megaTree, Optional<ResourceKey<ConfiguredFeature<?, ?>>> secondaryMegaTree, Optional<ResourceKey<ConfiguredFeature<?, ?>>> tree, Optional<ResourceKey<ConfiguredFeature<?, ?>>> secondaryTree, Optional<ResourceKey<ConfiguredFeature<?, ?>>> flowers, Optional<ResourceKey<ConfiguredFeature<?, ?>>> secondaryFlowers) {
+        return new TreeGrower(String.format("%s:%s", modID, name), secondaryChance, megaTree, secondaryMegaTree, tree, secondaryTree, flowers, secondaryFlowers);
+    }
+
+
+
+    private static final Set<ResourceKey<LootTable>> LOCATIONS = new HashSet();
+    private static final Set<ResourceKey<LootTable>> IMMUTABLE_LOCATIONS;
+
+
+    /**
+     * This method allows you to register custom-built in loot tables
+     * @param modID Your mod identifier
+     * @param name Name of your built-in loot table (can include paths like gameplay/lotus_flower_harvest)
+     */
+    public static ResourceKey<LootTable> registerBuiltInLootTable(String modID, String name) {
+        return register(ResourceKey.create(Registries.LOOT_TABLE, JinxedLib.customId(modID, name)));
+    }
+
+    private static ResourceKey<LootTable> register(ResourceKey<LootTable> $$0) {
+        if (LOCATIONS.add($$0)) {
+            return $$0;
+        } else {
+            throw new IllegalArgumentException(String.valueOf($$0.identifier()) + " is already a registered built-in loot table");
+        }
+    }
+
+    /**
+     * This method allows you to register sprite sources
+     * @param id The identifier of your custom sprite source
+     * @param codec A map codec that extends the Sprite Source class
+     */
+
+    public static ExtraCodecs.LateBoundIdMapper<Identifier, MapCodec<? extends SpriteSource>> registerSpriteSource(Identifier id, MapCodec<? extends SpriteSource> codec) {
+        return SpriteSourcesAccessor.getIdMapper().put(Objects.requireNonNull(id), Objects.requireNonNull(codec));
+    }
+
+    public static Set<ResourceKey<LootTable>> all() {
+        return IMMUTABLE_LOCATIONS;
+    }
+
+
+    static {
+        IMMUTABLE_LOCATIONS = Collections.unmodifiableSet(LOCATIONS);
+    }
+}
