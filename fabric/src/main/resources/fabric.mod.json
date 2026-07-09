@@ -7,19 +7,12 @@
     "authors": [
         "${mod_author}"
     ],
-    "contact": {
-        "homepage": "https://kekecreations.boomla.net/mods/minecraft-java-edition/jinxedlib",
-        "sources": "https://github.com/KekeCreations/JinxedLib"
-    },
     "license": "${license}",
     "icon": "${mod_id}.png",
     "environment": "*",
     "entrypoints": {
         "main": [
             "com.kekecreations.jinxedlib.JinxedLibFabric"
-        ],
-        "client": [
-            "com.kekecreations.jinxedlib.JinxedLibClientFabric"
         ]
     },
     "mixins": [
@@ -29,11 +22,11 @@
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
-        "minecraft": "${minecraft_version}",
+        "minecraft": "~${minecraft_version}",
         "java": ">=${java_version}"
     },
     "suggests": {
-        "arts-and-crafts": "*"
+        "another-mod": "*"
     }
 }
   
