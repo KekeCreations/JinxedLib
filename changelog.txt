@@ -1,5 +1,6 @@
 ### V1.0.6
 - Ported all features from V1.0.5 1.21.11 to V26.1.2
+- Removed NeoForge Loot Modifiers
 
 
 
