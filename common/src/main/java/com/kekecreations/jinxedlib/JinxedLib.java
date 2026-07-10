@@ -1,5 +1,7 @@
 package com.kekecreations.jinxedlib;
 
+import com.kekecreations.jinxedlib.core.registry.JinxedDatapackRegistries;
+import com.kekecreations.jinxedlib.core.util.JinxedCreativeCategoryHelper;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,9 @@ public class JinxedLib {
     public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
 
     public static void init() {
+        JinxedDatapackRegistries.register();
+        JinxedCreativeCategoryHelper.addVanillaDyesToColourOrder();
+        JinxedCreativeCategoryHelper.addVanillaDyesToColourOrderBackToFront();
     }
 
 
