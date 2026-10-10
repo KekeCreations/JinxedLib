@@ -1,3 +1,7 @@
+### V1.0.8
+- Added NeoForge Loot Modifiers for Arts & Crafts
+
+
 ### V1.0.7
 - Fixed Creative Category Helper
 
